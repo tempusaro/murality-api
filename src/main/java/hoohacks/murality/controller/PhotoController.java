@@ -1,4 +1,5 @@
 package hoohacks.murality.controller;
+import hoohacks.murality.entity.Photo;
 import hoohacks.murality.service.PhotoService;
 import hoohacks.murality.service.StorageService;
 
@@ -63,5 +64,17 @@ public class PhotoController {
             return new ResponseEntity<>("File not found: " + pid, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/get/{pid}")
+    public ResponseEntity getPhoto(@PathVariable String pid) {
+        Long photoId = Long.parseLong(pid);
+
+        Photo photo = photoService.getPhoto(photoId);
+        if (photo == null) {
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity(photo, HttpStatus.OK);
     }
 }

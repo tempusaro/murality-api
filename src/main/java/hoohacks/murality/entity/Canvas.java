@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Time;
 import java.util.List;
 
 @Entity
@@ -25,4 +26,7 @@ public class Canvas {
     // List<Photo> pictures; -> "1,2,3,4,5"
     String pictures;
 
+    Time createTime;
+
+    Time lastModifyTime;
 }

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/canvas/")
 @RequiredArgsConstructor
@@ -21,8 +23,22 @@ public class CanvasController {
 
     @GetMapping("get/{username}")
     public ResponseEntity getCanvas(@PathVariable String username) {
-        Canvas canvas = canvasService.getCanvas(username);
+        List<Canvas> canvasList = canvasService.getCanvas(username);
 
-        return new ResponseEntity(canvas, HttpStatus.OK);
+        if (canvasList.size() == 0) {
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity(canvasList, HttpStatus.OK);
+    }
+
+    @GetMapping("delete/{username}")
+    public ResponseEntity deleteCanvas(@PathVariable String username) {
+        Canvas canvas = canvasService.deleteCanvas(username);
+        if (canvas == null) {
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity(null, HttpStatus.OK);
     }
 }
