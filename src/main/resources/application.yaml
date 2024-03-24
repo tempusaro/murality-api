@@ -10,7 +10,7 @@ spring:
 
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/hoohacks
+    url: jdbc:mysql://
     username: root
     password:
     hikari:
@@ -21,3 +21,22 @@ spring:
       enabled: true
       max-file-size: 10240MB
       max-request-size: 10240MB
+
+  main:
+    allow-bean-definition-overriding: true
+
+cloud:
+  aws:
+    credentials:
+      access-key: key
+      secret-key: key
+    region:
+      static: us-east-1
+    stack:
+      auto: on
+    bucket:
+      name: hoohacks
+
+  data:
+    mongodb:
+      uri: url

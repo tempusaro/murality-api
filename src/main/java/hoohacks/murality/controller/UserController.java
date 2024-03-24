@@ -1,8 +1,12 @@
 package hoohacks.murality.controller;
 
+import hoohacks.murality.entity.User;
 import hoohacks.murality.module.Response;
+import hoohacks.murality.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -10,28 +14,22 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
 
-    @GetMapping("me/{username}")
-    public Response getUserProfile(@PathVariable String username) {
+    @Autowired
+    UserService userService;
 
+    @GetMapping("get/{username}")
+    public ResponseEntity getUserProfile(@PathVariable String username) {
         // getId by username
 
-
-        // return Response<>(user)
-        return new Response();
+        User user = null;
+        return new ResponseEntity(user, HttpStatus.OK);
     }
 
-    @PutMapping("me/{username}")
-    public Response updateUserProfile(@PathVariable String username) {
-        // getId by username
-        // User user = userReposity.getById(request.id)
+    @PutMapping("update/{username}")
+    public ResponseEntity updateUserProfile(RequestBody requestBody) {
 
-        // assign value
-        // user.picture = request.profilePicture;
-        // ...
+        User user = userService.updateUser(requestBody);
 
-        // db.update(user);
-
-        // return Response<>(success, user);
-        return new Response();
+        return new ResponseEntity(null, HttpStatus.OK);
     }
 }

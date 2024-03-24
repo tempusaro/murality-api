@@ -1,4 +1,6 @@
 package hoohacks.murality.controller;
+import hoohacks.murality.service.PhotoService;
+import hoohacks.murality.service.StorageService;
 
 import hoohacks.murality.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ public class PhotoController {
 
     @Autowired
     private StorageService service;
+
+    @Autowired
+    private PhotoService photoService;
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestBody byte[] fileBytes) {
