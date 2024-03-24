@@ -15,5 +15,5 @@ public interface CanvasRepository extends CrudRepository<Canvas, Long> {
 
     Canvas deleteCanvasByCid(@Param("cid") long cid);
 
-    List<Canvas> getAllByUid(@Param("uid") long uid);
+    List<Canvas> findAllByUidOrderByLastModifyTime(@Param("uid") long uid);
 }

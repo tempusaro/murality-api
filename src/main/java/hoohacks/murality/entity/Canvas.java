@@ -20,7 +20,7 @@ public class Canvas {
     long cid;
 
     // userId by photo creater
-    String uid;
+    long uid;
 
     // pic
     // List<Photo> pictures; -> "1,2,3,4,5"

@@ -26,9 +26,8 @@ public class CanvasService {
         // checker
 
         Long uid = user.getUid();
-        List<Canvas> canvasList = canvasRepository.getAllByUid(uid);
+        List<Canvas> canvasList = canvasRepository.findAllByUidOrderByLastModifyTime(uid);
 
-        Collections.sort(canvasList, (a, b) -> (b.getLastModifyTime().compareTo(a.getLastModifyTime())));
         return canvasList;
     }
 
