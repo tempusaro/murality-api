@@ -31,8 +31,16 @@ public class CanvasService {
         return canvasList;
     }
 
+    public Canvas getCanvasById(Long cid) {
+        return canvasRepository.findCanvasByCid(cid);
+    }
+
     public Canvas deleteCanvas(String userName) {
 
         return null;
+    }
+
+    public void save(Canvas canvas) {
+        canvasRepository.save(canvas);
     }
 }

@@ -21,7 +21,7 @@ public class CanvasController {
     @Autowired
     CanvasService canvasService;
 
-    @GetMapping("get/{username}")
+    @GetMapping("{username}")
     public ResponseEntity getCanvas(@PathVariable String username) {
         List<Canvas> canvasList = canvasService.getCanvas(username);
 

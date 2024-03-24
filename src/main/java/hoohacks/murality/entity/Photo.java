@@ -21,6 +21,8 @@ public class Photo {
     // User Who Uploader
     long uid;
 
+    long cid;
+
     // position (x, y)
     String x;
 
