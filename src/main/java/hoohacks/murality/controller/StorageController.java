@@ -3,19 +3,18 @@ import hoohacks.murality.entity.Photo;
 import hoohacks.murality.service.PhotoService;
 import hoohacks.murality.service.StorageService;
 
-import hoohacks.murality.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/photo")
-public class PhotoController {
+@RequestMapping("/api/storage")
+public class StorageController {
 
     @Autowired
     private StorageService service;
@@ -23,7 +22,7 @@ public class PhotoController {
     @Autowired
     private PhotoService photoService;
 
-    @PostMapping("/upload")
+    @PostMapping("")
     public ResponseEntity<String> uploadFile(@RequestBody byte[] fileBytes) {
         try {
             // Assuming your service can handle a byte array directly
@@ -42,39 +41,29 @@ public class PhotoController {
         }
     }
 
-    @GetMapping("/download/{pid}")
-    public ResponseEntity<?> downloadFile(@PathVariable String pid) {
+    @GetMapping("/{file_link}")
+    public ResponseEntity<?> downloadFile(@PathVariable String file_link) {
         try {
-            byte[] data = service.downloadFile(pid);
+            byte[] data = service.downloadFile(file_link);
             ByteArrayResource resource = new ByteArrayResource(data);
             return ResponseEntity
                     .ok()
                     .contentLength(data.length)
                     .header("Content-type", "application/octet-stream")
-                    .header("Content-disposition", "attachment; filename=\"" + pid + "\"")
+                    .header("Content-disposition", "attachment; filename=\"" + file_link + "\"")
                     .body(resource);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
-    @DeleteMapping("/delete/{pid}")
-    public ResponseEntity<String> deleteFile(@PathVariable String pid) {
-        if (!service.deleteFile(pid)) {
-            return new ResponseEntity<>("File not found: " + pid, HttpStatus.NOT_FOUND);
+    @DeleteMapping("/{file_link}")
+    public ResponseEntity<String> deleteFile(@PathVariable String file_link) {
+        if (!service.deleteFile(file_link)) {
+            return new ResponseEntity<>("File not found: " + file_link, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/get/{pid}")
-    public ResponseEntity getPhoto(@PathVariable String pid) {
-        Long photoId = Long.parseLong(pid);
 
-        Photo photo = photoService.getPhoto(photoId);
-        if (photo == null) {
-            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity(photo, HttpStatus.OK);
-    }
 }
