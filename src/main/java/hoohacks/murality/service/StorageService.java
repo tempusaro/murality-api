@@ -18,7 +18,7 @@ import java.io.IOException;
 @Service
 public class StorageService {
 
-    @Value("${application.bucket.name}")
+    @Value("${cloud.aws.bucket.name}")
     private String bucketName;
 
     @Autowired

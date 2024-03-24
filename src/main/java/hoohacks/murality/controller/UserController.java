@@ -3,6 +3,8 @@ package hoohacks.murality.controller;
 import hoohacks.murality.module.Response;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,13 +13,11 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @GetMapping("me/{username}")
-    public Response getUserProfile(@PathVariable String username) {
-
+    public ResponseEntity getUserProfile(@PathVariable String username) {
         // getId by username
 
-
-        // return Response<>(user)
-        return new Response();
+        User user = null;
+        return new ResponseEntity(user, HttpStatus.OK);
     }
 
     @PutMapping("me/{username}")
