@@ -1,4 +1,5 @@
 package hoohacks.murality.controller;
+import hoohacks.murality.service.PhotoService;
 import hoohacks.murality.service.StorageService;
 
 import hoohacks.murality.module.Response;
@@ -15,6 +16,9 @@ public class PhotoController {
 
     @Autowired
     private StorageService service;
+
+    @Autowired
+    private PhotoService photoService;
 
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam(value = "file") MultipartFile file) {
