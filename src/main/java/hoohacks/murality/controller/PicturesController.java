@@ -89,6 +89,20 @@ public class PicturesController {
         return new ResponseEntity(null, HttpStatus.CREATED);
     }
 
+    @PostMapping()
+    public ResponseEntity<String> addPhoto (@RequestBody Photo request) {
+        Photo photo = new Photo();
+        photo.setFileLink(request.getFileLink());
+
+
+        try {
+            photoService.save(photo);
+        } catch (Exception e) {
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(null, HttpStatus.CREATED);
+    }
+
     @PutMapping("/{pid}")
     public ResponseEntity updatePhoto(  @PathVariable String pid,
                                         @RequestParam("x") String x,
