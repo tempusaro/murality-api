@@ -20,6 +20,9 @@ public class PhotoDTO {
     @JsonProperty("uid")
     long uid;
 
+    @JsonProperty("cid")
+    long cid;
+
     // position (x, y)
     @JsonProperty("x")
     String x;
@@ -43,6 +46,7 @@ public class PhotoDTO {
         Photo photo = new Photo();
         photo.setPid(pid);
         photo.setFileLink(fileLink);
+        photo.setCid(cid);
         photo.setUid(uid);
         photo.setX(x);
         photo.setY(y);
