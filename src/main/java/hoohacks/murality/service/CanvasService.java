@@ -1,16 +1,39 @@
 package hoohacks.murality.service;
 
 import hoohacks.murality.entity.Canvas;
+import hoohacks.murality.entity.User;
+import hoohacks.murality.repository.CanvasRepository;
+import hoohacks.murality.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Array;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class CanvasService {
 
+    @Autowired
+    UserRepository userRepository;
 
-    public Canvas getCanvas(String userName) {
-        Canvas canvas = null;
+    @Autowired
+    CanvasRepository canvasRepository;
 
-        return canvas;
+    public List<Canvas> getCanvas(String userName) {
+        User user = userRepository.getUserByUsername(userName);
+        // checker
+
+        Long uid = user.getUid();
+        List<Canvas> canvasList = canvasRepository.getAllByUid(uid);
+
+        Collections.sort(canvasList, (a, b) -> (b.getLastModifyTime().compareTo(a.getLastModifyTime())));
+        return canvasList;
     }
 
+    public Canvas deleteCanvas(String userName) {
+
+        return null;
+    }
 }

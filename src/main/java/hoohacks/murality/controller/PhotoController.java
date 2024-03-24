@@ -1,4 +1,5 @@
 package hoohacks.murality.controller;
+import hoohacks.murality.entity.Photo;
 import hoohacks.murality.service.PhotoService;
 import hoohacks.murality.service.StorageService;
 
@@ -40,5 +41,17 @@ public class PhotoController {
     @DeleteMapping("/delete/{pid}")
     public ResponseEntity<String> deleteFile(@PathVariable String pid) {
         return new ResponseEntity<>(service.deleteFile(pid), HttpStatus.OK);
+    }
+
+    @GetMapping("/get/{pid}")
+    public ResponseEntity getPhoto(@PathVariable String pid) {
+        Long photoId = Long.parseLong(pid);
+
+        Photo photo = photoService.getPhoto(photoId);
+        if (photo == null) {
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity(photo, HttpStatus.OK);
     }
 }
