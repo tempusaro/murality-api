@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PhotoDTO {
 
-    long pid;
 
     @JsonProperty("fileLink")
     String fileLink;
@@ -38,13 +37,7 @@ public class PhotoDTO {
     String height;
 
     public Photo toPhoto() {
-        // Assuming the Photo entity has a matching constructor
-        // Photo photo = new Photo(pid, fileLink, uid, x, y, width, height);
-        // return photo;
-
-        // Or, if the Photo entity has setters instead of a matching constructor
         Photo photo = new Photo();
-        photo.setPid(pid);
         photo.setFileLink(fileLink);
         photo.setCid(cid);
         photo.setUid(uid);
