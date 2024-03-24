@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class Photo {
 
     @Id
+    @Column(name = "pid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long pid;
 
